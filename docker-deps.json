@@ -1,8 +1,0 @@
-{
-  "name": "MON PROJET",
-  "version": "1.0.0",
-  "dependencies": {
-    "mysql": "8",
-    "redis": "7.2.0"
-  }
-}

@@ -123,7 +123,7 @@ func newInstallCommand(dockerCli command.Cli) *cobra.Command {
 	return &cobra.Command{
 		Use:   "install",
 		Short: "Pull all images listed as dependencies in the manifest",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -151,7 +151,7 @@ func newInstallCommand(dockerCli command.Cli) *cobra.Command {
 
 func runDockerPull(dockerCli command.Cli, imgName string) error {
 	apiClient := dockerCli.Client()
-	
+
 	out, err := apiClient.ImagePull(context.Background(), imgName, client.ImagePullOptions{})
 	if err != nil {
 		return err
@@ -169,11 +169,11 @@ func runDockerPull(dockerCli command.Cli, imgName string) error {
 			}
 			return err
 		}
-		
+
 		status, _ := m["status"].(string)
 		id, _ := m["id"].(string)
 		progress, _ := m["progress"].(string)
-		
+
 		if status != "" {
 			if id != "" {
 				if progress != "" {
@@ -196,6 +196,7 @@ func newInitCommand(dockerCli command.Cli) *cobra.Command {
 		Short: "Initialize or update the manifest with project name and version",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			_ = cmd
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -216,6 +217,7 @@ func newAddCommand(dockerCli command.Cli) *cobra.Command {
 		Short: "Add a dependency to the manifest",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			_ = cmd
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -236,6 +238,7 @@ func newRemoveCommand(dockerCli command.Cli) *cobra.Command {
 		Short: "Remove a dependency from the manifest",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			_ = cmd
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -258,6 +261,7 @@ func newUpdateCommand(dockerCli command.Cli) *cobra.Command {
 		Short: "Update a dependency version in the manifest",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			_ = cmd
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -278,7 +282,7 @@ func newListCommand(dockerCli command.Cli) *cobra.Command {
 	return &cobra.Command{
 		Use:   "list",
 		Short: "List all dependencies in the manifest",
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -302,6 +306,7 @@ func newInfoCommand(dockerCli command.Cli) *cobra.Command {
 		Short: "Get detailed information about a dependency",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			_ = cmd
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -322,6 +327,7 @@ func newWhyCommand(dockerCli command.Cli) *cobra.Command {
 		Short: "Explain why a dependency is in the manifest",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			_ = cmd
 			m, err := loadManifest(manifestFile)
 			if err != nil {
 				return err
@@ -339,7 +345,8 @@ func newVersionCommand(dockerCli command.Cli, meta metadata.Metadata) *cobra.Com
 	return &cobra.Command{
 		Use:   "version",
 		Short: "Show the plugin version information",
-		Run: func(cmd *cobra.Command, args []string) {
+		Run: func(cmd *cobra.Command, _ []string) {
+			_ = cmd
 			_, _ = fmt.Fprintf(dockerCli.Out(), "Docker Manifest Plugin Version: %s\nVendor: %s\n", meta.Version, meta.Vendor)
 		},
 	}

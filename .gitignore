@@ -1,6 +1,7 @@
 # Binaries
 docker-deps
 docker-deps.exe
+docker-deps.json
 docker-manifest
 
 # Testing
@@ -10,7 +11,6 @@ invalid.json
 
 # Go
 vendor/
-go.sum
 
 # IDE
 .idea/

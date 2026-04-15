@@ -1,92 +1,81 @@
 # Docker Deps
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/philippe/docker-deps)](https://goreportcard.com/report/github.com/philippe/docker-deps)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/filoucrackeur/docker-deps/actions/workflows/ci.yml/badge.svg)](https://github.com/filoucrackeur/docker-deps/actions/workflows/ci.yml)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/filoucrackeur/docker-deps)](https://github.com/filoucrackeur/docker-deps)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/filoucrackeur/docker-deps)](https://github.com/filoucrackeur/docker-deps/graphs/contributors)
 
-**Docker Deps** is a Docker CLI plugin that simplifies dependency management for your containerized projects. It works like `npm`, `composer`, or `pip`, but for your Docker images. It manages a `docker-deps.json` manifest to track, update, and install the specific image versions your project requires.
-
----
-
-## 🚀 Key Features
-
-- **Project Manifest**: Declare all your image dependencies in a single `docker-deps.json` file.
-- **Dependency Management**: Easily `add`, `remove`, and `update` image requirements via the CLI.
-- **Bulk Installation**: Run `docker deps install` to pull all required images at once with a clean progress display.
-- **Visibility**: Get detailed `info` and `list` all your project requirements instantly.
-- **Docker Native**: Integrated directly into the Docker CLI as a first-class plugin.
+A Docker CLI plugin for managing project dependencies. Think `npm`, `composer`, or `pip` — but for Docker images.
 
 ---
 
-## 📦 Installation
+## Features
+
+- **Manifest-based**: Declare image dependencies in a `docker-deps.json` file
+- **CLI commands**: `add`, `remove`, `update`, `list`, `info`, `why`, `install`
+- **Bulk install**: Pull all dependencies at once with progress display
+- **Docker native**: Integrated as a first-class Docker CLI plugin
+
+---
+
+## Installation
 
 ### Prerequisites
 
-- [Go](https://golang.org/doc/install) 1.21 or higher
-- [Docker](https://docs.docker.com/get-docker/) installed and running
+- Go 1.26+
+- Docker CLI
 
-### Step 1: Clone and Build
+### From source
 
 ```bash
-git clone https://github.com/your-username/docker-deps.git
+git clone https://github.com/filoucrackeur/docker-deps.git
 cd docker-deps
 make build
-```
-
-### Step 2: Install as a Docker Plugin
-
-```bash
 make install
 ```
-*Note: This moves the binary to `~/.docker/cli-plugins/docker-deps`.*
 
-### Step 3: Verify Installation
-
+Verify:
 ```bash
 docker help | grep deps
 ```
 
 ---
 
-## 🛠 Usage
+## Usage
 
-### Initialize your project
 ```bash
-docker deps init my-awesome-project 1.0.0
-```
+# Initialize a project
+docker deps init my-project 1.0.0
 
-### Add a dependency
-```bash
+# Add dependencies
 docker deps add redis 7.2.0
 docker deps add nginx 1.25.1
-```
 
-### Install all dependencies (Pull images)
-```bash
+# Install all dependencies (pull images)
 docker deps install
-```
 
-### List all dependencies
-```bash
+# List dependencies
 docker deps list
-```
 
-### Update a dependency
-```bash
+# Update a dependency
 docker deps update redis 7.2.4
-```
 
-### Remove a dependency
-```bash
+# Get dependency info
+docker deps info redis
+docker deps why redis
+
+# Remove a dependency
 docker deps remove nginx
 ```
 
 ---
 
-## 📄 Manifest Structure (`docker-deps.json`)
+## Manifest
 
+`docker-deps.json`:
 ```json
 {
-  "name": "my-awesome-project",
+  "name": "my-project",
   "version": "1.0.0",
   "dependencies": {
     "nginx": "1.25.1",
@@ -97,30 +86,22 @@ docker deps remove nginx
 
 ---
 
-## 🛠 Development & Testing
+## Development
 
-### Run Tests with Coverage
 ```bash
-make test
-```
-
-### Linting
-```bash
-make lint
+make test      # Run tests
+make lint      # Run linter
+make coverage  # Check coverage
 ```
 
 ---
 
-## 🤝 Contributing
+## License
 
-Contributions are welcome! Please check our [Contributing Guide](CONTRIBUTING.md) for more details.
-
-## ⚖️ License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+MIT © Philippe Court
 
 ---
 
-## 👨‍💻 Author
+## Contributors
 
-**Philippe Court** - [philippe.court@gmail.com](mailto:philippe.court@gmail.com)
+[![Contributors](https://contrib.rocks/image?repo=filoucrackeur/docker-deps)](https://github.com/filoucrackeur/docker-deps/graphs/contributors)

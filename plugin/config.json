@@ -1,0 +1,8 @@
+{
+  "description": "Docker plugin for managing project dependencies",
+  "documentation": "https://github.com/filoucrackeur/docker-deps",
+  "entrypoint": ["/docker-deps"],
+  "host": {
+    "socket": "docker.sock"
+  }
+}

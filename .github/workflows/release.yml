@@ -65,7 +65,8 @@ jobs:
 
       - name: Create Docker plugin
         run: |
-          docker plugin rm docker.io/${{ env.PLUGIN_NAME }}:${GITHUB_REF#refs/tags/v} 2>/dev/null || true
+          docker plugin disable -f docker.io/${{ env.PLUGIN_NAME }}:${GITHUB_REF#refs/tags/v} 2>/dev/null || true
+          docker plugin rm -f docker.io/${{ env.PLUGIN_NAME }}:${GITHUB_REF#refs/tags/v} 2>/dev/null || true
           docker plugin create docker.io/${{ env.PLUGIN_NAME }}:${GITHUB_REF#refs/tags/v} plugin
 
       - name: Login to Docker Hub

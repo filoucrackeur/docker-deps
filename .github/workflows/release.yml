@@ -77,3 +77,11 @@ jobs:
         run: |
           docker plugin push docker.io/${{ env.PLUGIN_NAME }}:${GITHUB_REF#refs/tags/v}
           docker plugin push docker.io/${{ env.PLUGIN_NAME }}:latest
+
+      - name: Update Docker Hub repository details
+        run: |
+          curl -X PATCH \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.DOCKERHUB_TOKEN }}" \
+            -d '{"description": "A Docker CLI plugin for managing project dependencies. Think npm, composer, or pip - but for Docker images.", "full_description": "# Docker Deps\n\nA Docker CLI plugin for managing project dependencies.\n\n## Features\n- Manage project dependencies with a manifest file\n- CLI commands: add, remove, update, list, info, why, install\n- Bulk install: Pull all dependencies at once\n- Docker native: Integrated as a first-class Docker CLI plugin\n\n## Installation\n\n```bash\ndocker plugin install filoucrackeur/docker-deps\n```\n\n## Usage\n\n```bash\n# Initialize a project\ndocker deps init my-project 1.0.0\n\n# Add dependencies\ndocker deps add redis 7.2.0\n\n# Install all dependencies\ndocker deps install\n\n# List dependencies\ndocker deps list\n```", "category_type": 2}' \
+            https://hub.docker.com/v2/repositories/${{ env.PLUGIN_NAME }}/

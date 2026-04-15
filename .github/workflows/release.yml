@@ -75,7 +75,9 @@ jobs:
 
       - name: Push plugin to Docker Hub
         run: |
-          docker plugin push docker.io/${{ env.PLUGIN_NAME }}:${GITHUB_REF#refs/tags/v}
+          PLUGIN_TAG=${GITHUB_REF#refs/tags/v}
+          docker plugin push docker.io/${{ env.PLUGIN_NAME }}:$PLUGIN_TAG
+          docker plugin tag docker.io/${{ env.PLUGIN_NAME }}:$PLUGIN_TAG docker.io/${{ env.PLUGIN_NAME }}:latest
           docker plugin push docker.io/${{ env.PLUGIN_NAME }}:latest
 
       - name: Update Docker Hub repository details

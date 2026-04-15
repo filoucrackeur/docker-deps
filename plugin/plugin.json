@@ -1,9 +1,0 @@
-{
-  "manifestVersion": "0.1.0",
-  "name": "filoucrackeur/docker-deps",
-  "description": "A Docker plugin for managing project dependencies",
-  "version": "1.0.0",
-  "vendor": "Philippe Court <philippe.court@gmail.com>",
-  "icon": "https://raw.githubusercontent.com/filoucrackeur/docker-deps/main/icon.png",
-  "license": "MIT"
-}

@@ -80,6 +80,8 @@ jobs:
           PLUGIN_TAG=${GITHUB_REF#refs/tags/v}
           docker plugin create docker.io/${{ env.PLUGIN_NAME }}:$PLUGIN_TAG plugin || true
           docker plugin push docker.io/${{ env.PLUGIN_NAME }}:$PLUGIN_TAG
+          docker plugin create docker.io/${{ env.PLUGIN_NAME }}:latest plugin || true
+          docker plugin push docker.io/${{ env.PLUGIN_NAME }}:latest
 
       - name: Update Docker Hub repository details
         run: |

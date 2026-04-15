@@ -1,0 +1,23 @@
+# Binaries
+docker-deps
+docker-deps.exe
+docker-manifest
+
+# Testing
+coverage.out
+test-docker-deps.json
+invalid.json
+
+# Go
+vendor/
+go.sum
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
